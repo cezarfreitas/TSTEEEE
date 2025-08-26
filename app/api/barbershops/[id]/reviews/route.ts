@@ -4,13 +4,13 @@ import { validateReview } from "@/lib/validators"
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const barbershop = dataStore.getBarbershopById(params.id)
+    const barbershop = await dataStore.getBarbershopById(params.id)
 
     if (!barbershop) {
       return NextResponse.json({ success: false, error: "Barbearia não encontrada" }, { status: 404 })
     }
 
-    const reviews = dataStore.getReviewsByBarbershopId(params.id)
+    const reviews = await dataStore.getReviewsByBarbershopId(params.id)
 
     return NextResponse.json({
       success: true,
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const barbershop = dataStore.getBarbershopById(params.id)
+    const barbershop = await dataStore.getBarbershopById(params.id)
 
     if (!barbershop) {
       return NextResponse.json({ success: false, error: "Barbearia não encontrada" }, { status: 404 })
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ success: false, errors: validation.errors }, { status: 400 })
     }
 
-    const review = dataStore.createReview({
+    const review = await dataStore.createReview({
       ...body,
       barbershopId: params.id,
     })
