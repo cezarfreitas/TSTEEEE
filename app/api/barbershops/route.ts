@@ -4,7 +4,7 @@ import { validateCreateBarbershop } from "@/lib/validators"
 
 export async function GET(request: NextRequest) {
   try {
-    const barbershops = dataStore.getAllBarbershops()
+    const barbershops = await dataStore.getAllBarbershops()
 
     return NextResponse.json({
       success: true,
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, errors: validation.errors }, { status: 400 })
     }
 
-    const barbershop = dataStore.createBarbershop({
+    const barbershop = await dataStore.createBarbershop({
       ...body,
       verified: false, // Novas barbearias começam não verificadas
     })

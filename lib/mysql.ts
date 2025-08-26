@@ -1,11 +1,26 @@
 import mysql from "mysql2/promise"
 
+const {
+  MYSQL_HOST,
+  MYSQL_PORT,
+  MYSQL_USER,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+} = process.env
+
+function requireEnv(name: string, value: string | undefined) {
+  if (!value) {
+    throw new Error(`Variável de ambiente ausente: ${name}`)
+  }
+  return value
+}
+
 const connectionConfig = {
-  host: "server.idenegociosdigitais.com.br",
-  port: 3355,
-  user: "barbearia",
-  password: "5f8dab8402afe2a6e043",
-  database: "barbearia-db",
+  host: requireEnv("MYSQL_HOST", MYSQL_HOST),
+  port: Number(MYSQL_PORT ?? 3306),
+  user: requireEnv("MYSQL_USER", MYSQL_USER),
+  password: requireEnv("MYSQL_PASSWORD", MYSQL_PASSWORD),
+  database: requireEnv("MYSQL_DATABASE", MYSQL_DATABASE),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -14,7 +29,6 @@ const connectionConfig = {
   reconnect: true,
 }
 
-// Pool de conexões para melhor performance
 const pool = mysql.createPool(connectionConfig)
 
 export async function executeQuery<T = any>(query: string, params: any[] = []): Promise<T[]> {

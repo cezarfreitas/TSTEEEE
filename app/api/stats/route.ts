@@ -3,7 +3,7 @@ import { dataStore } from "@/lib/data-store"
 
 export async function GET(request: NextRequest) {
   try {
-    const barbershops = dataStore.getAllBarbershops()
+    const barbershops = await dataStore.getAllBarbershops()
 
     const stats = {
       totalBarbershops: barbershops.length,

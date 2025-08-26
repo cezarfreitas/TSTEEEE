@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    const results = dataStore.searchBarbershops(filters)
+    const results = await dataStore.searchBarbershops(filters)
 
     return NextResponse.json({
       success: true,
