@@ -1,0 +1,56 @@
+# Dependências
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# Arquivos de ambiente local
+.env*.local
+.env
+
+# Arquivos de build do Vercel
+.vercel
+
+# Arquivos do Next.js
+.next/
+out/
+
+# Arquivos de produção
+build
+
+# Arquivos diversos
+.DS_Store
+*.tsbuildinfo
+
+# Arquivos de debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de IDE
+.vscode
+.idea
+
+# Arquivos de teste
+coverage
+*.lcov
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Logs
+logs
+*.log
+
+# Git
+.git
+.gitignore
+README.md
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
